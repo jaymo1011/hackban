@@ -4,6 +4,7 @@ Convars = {
 	UnsafeEventsArray = "hackban_unsafeEvents",
 	BlockedModelArray = "hackban_blockedModels",
 	BlockedPhraseArray = "hackban_blockedPhrases",
+	BlockedExplosionArray = "hackban_blockedExplosions",
 }
 
 local getConvar = GetConvar
