@@ -8,6 +8,11 @@ local configMap = {
 		convar = "hackban_kickReason",
 		default = "big sad :("
 	},
+	
+	ModelBlacklistString  = {
+		convar = "hackban_blockedModels",
+		default = "nero, nero2"
+	},
 }
 
 Config = {}
