@@ -1,23 +1,31 @@
-local checkedSafeEvents = {}
+local checkedEvents = {}
 
 AddEventHandler("__hackban_internal:netEventTriggered", function(eventName, source, eventPayload)
+	-- Get the safety of this event
+	local eventSafety = checkedEvents[eventName]
 	--local data = msgpack.unpack(eventPayload)
 
-	-- for perf reasons, we only match on events we haven't seen before
-	if not checkedSafeEvents[eventName] then
-		for pattern in string.gmatch(Config.EventFilterString, "%b{}") do
+	-- If we don't yet know the safety of this event, find that out before continuing
+	if not eventSafety then
+		for _, pattern in ipairs(BlockedEvents) do
 			if string.match(eventName, string.sub(pattern,2,-2)) then
-				HandlePlayer(source)
-				return
+				eventSafety = "unsafe"
+				break
 			end
 		end
 
-		checkedSafeEvents[eventName] = true
+		eventSafety = eventSafety or "safe"
+		checkedEvents[eventName] = eventSafety
+	end
+
+	-- If this event is not safe, kick the player who triggered it
+	if eventSafety ~= "safe" then
+		HandlePlayer(source)
 	end
 end)
 
+-- Clear the pre-filtered events on refresh because, yeah
 AddEventHandler("hackban:refresh", function()
-	-- Clear the pre-filtered events because, yeah
 	for ev in pairs(checkedSafeEvents) do
 		checkedSafeEvents[ev] = nil
 	end

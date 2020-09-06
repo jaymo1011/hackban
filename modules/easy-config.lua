@@ -1,9 +1,4 @@
 local configMap = {
-	EventFilterString = {
-		convar = "hackban_eventFilter",
-		default = "{hackban:testTrigger}{hackban:testTrigger%d*}",
-	},
-
 	KickReason = {
 		convar = "hackban_kickReason",
 		default = "big sad :("
