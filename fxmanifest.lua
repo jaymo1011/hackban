@@ -6,8 +6,8 @@ version '3.0.0'
 description 'big meme anticheat™'
 
 server_scripts {
+	"convars.lua",
 	"event-capture.js",
-	"blocked-events.lua",
 	"modules/*.lua",
-	"hackban.lua",
+	"server.lua",
 }
